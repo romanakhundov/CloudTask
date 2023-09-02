@@ -1,0 +1,38 @@
+---
+
+- name: Playbook for Cloudru task
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Create new user
+      user:
+        name: cloudru
+        # Захешированный пароль 'cloudpass'
+        password: "$6$f0cbejHsU5ZBsJV2$nNU8GWQCsh5kSQSDh6N//D2Y/0st8ZtFENUBDChWBXKnHpByoKpg9UPHcXUiJf1vA0LD9fQYOpgY1XGvszVts."
+        shell: /bin/bash
+
+    - name: Add authorized key from cloudru_public_key.pub
+      authorized_key:
+        user: cloudru
+        key: "{{ lookup('file', '/etc/ansible/cloudru_public_key.pub') }}"
+        state: present
+
+    - name: Allow SSH key authentication
+      lineinfile:
+        dest: /etc/ssh/sshd_config
+        regexp: '^PubkeyAuthentication'
+        line: 'PubkeyAuthentication yes'
+        backup: yes
+
+    - name: Disable root SSH login
+      lineinfile:
+        dest: /etc/ssh/sshd_config
+        regexp: '^PermitRootLogin'
+        line: 'PermitRootLogin no'
+        backup: yes
+
+    - name: Reload SSH servise
+      service:
+        name: sshd
+        state: reloaded

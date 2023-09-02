@@ -1,0 +1,2 @@
+
+# Run the playbook with the command: ansible-playbook playbook.yml -K

@@ -1,0 +1,2 @@
+ansible_user                 :  aher 
+ansible_ssh_public_key_file  :  /home/aher/.ssh/id_rsa.pub
