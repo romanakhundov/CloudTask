@@ -1,0 +1,7 @@
+image:
+  repository: my-web-app
+  tag: latest
+
+replicaCount: 3
+
+author: "Akhundov Roman"
