@@ -18,6 +18,8 @@ spec:
           ports:
             - containerPort: 8000
           env:
+            - name: AUTHOR
+              value: "{{ .Values.author }}"
             - name: UUID
               valueFrom:
                 fieldRef:
