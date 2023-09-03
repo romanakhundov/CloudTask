@@ -1,5 +1,5 @@
 apiVersion: v2
 name: cloudru chart
-descriprion: Helm chart for cloudru
+description: Helm chart for cloudru
 version: 0.1.0
 
